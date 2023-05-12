@@ -11,6 +11,12 @@
 		B6B11BE72A0EC27D00152BDA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BE62A0EC27D00152BDA /* ContentView.swift */; };
 		B6B11BE92A0EC27D00152BDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6B11BE82A0EC27D00152BDA /* Assets.xcassets */; };
 		B6B11BED2A0EC27D00152BDA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6B11BEC2A0EC27D00152BDA /* Preview Assets.xcassets */; };
+		B6B11BF62A0EC5E900152BDA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BF52A0EC5E900152BDA /* Constants.swift */; };
+		B6B11BF92A0EC60D00152BDA /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BF82A0EC60D00152BDA /* Manager.swift */; };
+		B6B11BFB2A0EC6B000152BDA /* ShareScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BFA2A0EC6B000152BDA /* ShareScreenView.swift */; };
+		B6B11BFD2A0EC6D600152BDA /* ShareSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BFC2A0EC6D600152BDA /* ShareSuccessView.swift */; };
+		B6B11BFF2A0EC72800152BDA /* ClaimNowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BFE2A0EC72800152BDA /* ClaimNowView.swift */; };
+		B6B11C012A0EC75000152BDA /* ClaimSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11C002A0EC75000152BDA /* ClaimSuccessView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +26,12 @@
 		B6B11BE82A0EC27D00152BDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6B11BEA2A0EC27D00152BDA /* Geist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Geist.entitlements; sourceTree = "<group>"; };
 		B6B11BEC2A0EC27D00152BDA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B6B11BF52A0EC5E900152BDA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B6B11BF82A0EC60D00152BDA /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		B6B11BFA2A0EC6B000152BDA /* ShareScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreenView.swift; sourceTree = "<group>"; };
+		B6B11BFC2A0EC6D600152BDA /* ShareSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSuccessView.swift; sourceTree = "<group>"; };
+		B6B11BFE2A0EC72800152BDA /* ClaimNowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimNowView.swift; sourceTree = "<group>"; };
+		B6B11C002A0EC75000152BDA /* ClaimSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimSuccessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,10 @@
 			children = (
 				B6B11BE42A0EC27D00152BDA /* GeistApp.swift */,
 				B6B11BE62A0EC27D00152BDA /* ContentView.swift */,
+				B6B11BF72A0EC5FE00152BDA /* Shared */,
+				B6B11BF52A0EC5E900152BDA /* Constants.swift */,
+				B6B11BF32A0EC5CC00152BDA /* SenderFlow */,
+				B6B11BF42A0EC5D300152BDA /* ReceiverFlow */,
 				B6B11BE82A0EC27D00152BDA /* Assets.xcassets */,
 				B6B11BEA2A0EC27D00152BDA /* Geist.entitlements */,
 				B6B11BEB2A0EC27D00152BDA /* Preview Content */,
@@ -67,6 +83,32 @@
 				B6B11BEC2A0EC27D00152BDA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B6B11BF32A0EC5CC00152BDA /* SenderFlow */ = {
+			isa = PBXGroup;
+			children = (
+				B6B11BFA2A0EC6B000152BDA /* ShareScreenView.swift */,
+				B6B11BFC2A0EC6D600152BDA /* ShareSuccessView.swift */,
+			);
+			path = SenderFlow;
+			sourceTree = "<group>";
+		};
+		B6B11BF42A0EC5D300152BDA /* ReceiverFlow */ = {
+			isa = PBXGroup;
+			children = (
+				B6B11BFE2A0EC72800152BDA /* ClaimNowView.swift */,
+				B6B11C002A0EC75000152BDA /* ClaimSuccessView.swift */,
+			);
+			path = ReceiverFlow;
+			sourceTree = "<group>";
+		};
+		B6B11BF72A0EC5FE00152BDA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B6B11BF82A0EC60D00152BDA /* Manager.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +183,12 @@
 			files = (
 				B6B11BE72A0EC27D00152BDA /* ContentView.swift in Sources */,
 				B6B11BE52A0EC27D00152BDA /* GeistApp.swift in Sources */,
+				B6B11BFD2A0EC6D600152BDA /* ShareSuccessView.swift in Sources */,
+				B6B11C012A0EC75000152BDA /* ClaimSuccessView.swift in Sources */,
+				B6B11BF62A0EC5E900152BDA /* Constants.swift in Sources */,
+				B6B11BF92A0EC60D00152BDA /* Manager.swift in Sources */,
+				B6B11BFB2A0EC6B000152BDA /* ShareScreenView.swift in Sources */,
+				B6B11BFF2A0EC72800152BDA /* ClaimNowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
