@@ -11,7 +11,7 @@ import SwiftUI
 struct GeistApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartView()
         }
     }
 }
