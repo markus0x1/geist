@@ -9,13 +9,16 @@ import SwiftUI
 
 struct StartView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                NavigationLink("Send GHO") {
+                    ShareScreenView()
+                }
+                NavigationLink("Receive GHO") {
+                    ClaimNowView()
+                }
+            }
         }
-        .padding()
     }
 }
 
