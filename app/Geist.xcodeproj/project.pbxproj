@@ -17,6 +17,7 @@
 		B6B11BFD2A0EC6D600152BDA /* ShareSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BFC2A0EC6D600152BDA /* ShareSuccessView.swift */; };
 		B6B11BFF2A0EC72800152BDA /* ClaimNowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BFE2A0EC72800152BDA /* ClaimNowView.swift */; };
 		B6B11C012A0EC75000152BDA /* ClaimSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11C002A0EC75000152BDA /* ClaimSuccessView.swift */; };
+		B6FD96582A0ECC5900CBCDDA /* web3swift in Frameworks */ = {isa = PBXBuildFile; productRef = B6FD96572A0ECC5900CBCDDA /* web3swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6FD96582A0ECC5900CBCDDA /* web3swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +129,9 @@
 			dependencies = (
 			);
 			name = Geist;
+			packageProductDependencies = (
+				B6FD96572A0ECC5900CBCDDA /* web3swift */,
+			);
 			productName = Geist;
 			productReference = B6B11BE12A0EC27D00152BDA /* Geist.app */;
 			productType = "com.apple.product-type.application";
@@ -155,6 +160,9 @@
 				Base,
 			);
 			mainGroup = B6B11BD82A0EC27D00152BDA;
+			packageReferences = (
+				B6FD96562A0ECC5900CBCDDA /* XCRemoteSwiftPackageReference "web3swift" */,
+			);
 			productRefGroup = B6B11BE22A0EC27D00152BDA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -402,6 +410,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B6FD96562A0ECC5900CBCDDA /* XCRemoteSwiftPackageReference "web3swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/web3swift-team/web3swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B6FD96572A0ECC5900CBCDDA /* web3swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6FD96562A0ECC5900CBCDDA /* XCRemoteSwiftPackageReference "web3swift" */;
+			productName = web3swift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B6B11BD92A0EC27D00152BDA /* Project object */;
 }
