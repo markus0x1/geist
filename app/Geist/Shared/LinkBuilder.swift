@@ -7,9 +7,14 @@
 
 import Foundation
 
-final class LinkBuilder {
+final class UrlBuilder {
+    private let host: String = "https://geist.xyz"
+    private let keyword: String = "claim"
 
-    func generateLink(for id: String) {}
+    func generateLink(for id: String) -> String {
+        let url = "\(host)/\(keyword)?\(id)"
+        return url
+    }
 
     func parseUrl(_ url: String) {}
 }
