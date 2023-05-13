@@ -36,11 +36,12 @@ struct SenderStartView: View {
         .padding()
         .task {
             let manager = Manager.shared
+            await manager.configSender()
             let account = manager.senderAccount!
             self.address = account.addressFormattedShort
             let balance = await manager.balanceProvider.balanceOf(erc20Token: EthereumAddress(Tokens.GHO)!, for: account.address)
             print(balance, "GHO balance")
-            let formattedBalance = Utilities.formatToPrecision(balance, formattingDecimals: 18)
+            let formattedBalance = Utilities.formatToPrecision(balance)
             self.balance = formattedBalance
         }
         .toolbar(.hidden)
