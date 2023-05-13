@@ -6,7 +6,7 @@ import {stdStorage, StdStorage, Test} from "forge-std/Test.sol";
 
 import {Utils} from "../test/Utils.t.sol";
 import {GHO} from "../src/Token.sol";
-import {TokenHolder} from "../src/TokenHolder.sol";
+import "../src/AppAccount.sol";
 
 contract BaseSetup is Test {
     Utils internal utils;
@@ -15,8 +15,11 @@ contract BaseSetup is Test {
     address internal alice;
     address internal bob;
 
+    address constant ENTRY_POINT_ADDRESSS = address(0);
+    address executor;
+
     GHO token;
-    TokenHolder holder;
+    AppAccount holder;
 
     function setUp() public virtual {
         utils = new Utils();
@@ -28,7 +31,7 @@ contract BaseSetup is Test {
         vm.label(bob, "Bob");
 
         token = new GHO(1e18);
-        holder = new TokenHolder(token, bob);
+        holder = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS),  executor, bob, token);
 
         console.log("deployed token with symbol", token.symbol());
     }
@@ -48,7 +51,7 @@ contract BaseSetup is Test {
         assertEq(token.balanceOf(alice), 0);
         assertEq(token.balanceOf(bob), 0);
         vm.prank(bob);
-        holder.withdraw(bob, 1e18);
+        holder.withdraw(bob,  1e18);
         assertEq(token.balanceOf(bob), 1e18);
     }
 }
