@@ -38,7 +38,7 @@ struct SenderInputView: View {
                         .progressViewStyle(.circular)
                 }
                 Spacer()
-                Button("SEND GHO") {
+                Button("Send GHO") {
                     Task.init {
                         if (isGenerating) { return }
                         isGenerating = true
