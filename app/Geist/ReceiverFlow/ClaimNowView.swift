@@ -16,16 +16,16 @@ struct ClaimNowView: View {
                 .padding(.bottom, 64)
             Text("You have 47h left to claim it")
                 .font(.caption)
-            Button {
-                print("pressed")
-            } label: {
-                Text("Claim Now")
-                    .fontWeight(.bold)
-                    .foregroundColor(.accentColor)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding()
-                    .background(Color.primary)
-                    .cornerRadius(10)
+                NavigationLink {
+                    ClaimSuccessView()
+                } label: {
+                    Text("Claim Now")
+                        .fontWeight(.bold)
+                        .foregroundColor(.accentColor)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .background(Color.primary)
+                        .cornerRadius(10)
             }
         }
         .padding()
