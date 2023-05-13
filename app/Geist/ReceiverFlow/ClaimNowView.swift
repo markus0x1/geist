@@ -78,16 +78,10 @@ struct ClaimNowView: View {
                     withAnimation {
                         isLoading.toggle()
                     }
-
                 } label: {
                     Text("Claim Now")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .background(GeistFontColor.title)
-                        .cornerRadius(10)
                 }
+                .buttonStyle(rounded(backgroundColor: GeistColor.purpleDark, disabledBackgroundColor: GeistColor.gray))
             }
             .padding(.top, 64)
             .padding()
