@@ -19,7 +19,6 @@ import "./AppSpenderSigner.sol";
     3) fund this account with some eth to pay for the paymaster
     4) let the transactions paid by the paymaster
 
-
 */
 
 contract AppAccount is SimpleAccount, AppSpenderSigner, TokenHolder  {
@@ -32,7 +31,6 @@ contract AppAccount is SimpleAccount, AppSpenderSigner, TokenHolder  {
         IEntryPoint anEntryPoint,
         address _executor,
         address _owner
-
     ) SimpleAccount(anEntryPoint)  TokenHolder() {
         executor = _executor;
         owner = _owner;

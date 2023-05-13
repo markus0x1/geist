@@ -3,7 +3,6 @@
 pragma solidity ^0.8.0;
 
 import "./GHO.sol";
-import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract TokenHolder {
 
