@@ -24,7 +24,7 @@ contract DeployFull is Script {
 
     }
 
-    GHO gho;
+    ERC20 gho;
     
     User alice;
     User bob;
@@ -37,10 +37,30 @@ contract DeployFull is Script {
         vm.stopBroadcast();
     }
 
-    function deployGho() internal {
-        uint256  initalSupply = 100 * 10**18;
-        gho = new GHO(initalSupply);
-        console.log("GHO address: %s", address(gho));
+    modifier broadcast(uint256 pk) {
+        vm.startBroadcast(pk);
+        _;
+        vm.stopBroadcast();
+    }
+    function deployGho(uint256 pk) internal  broadcast(pk) returns (ERC20){
+        uint256 initalSupply = 100 * 10**18;
+        GHO _gho = new GHO(initalSupply);
+        return ERC20(address(_gho));
+    }
+
+    function _deposit(User memory usr, uint256 amount, ERC20 token) internal broadcast(usr.pk) {
+        require(token.balanceOf(usr.addr) >= amount, "not enough balance");
+        uint256 aaBalanceBefore = token.balanceOf(address(usr.aa));
+        
+        usr.aa.depositToken(usr.addr, gho, amount);
+        require(token.balanceOf(address(usr.aa)) == aaBalanceBefore + amount, "not enough balance");
+    }
+    function _withdraw(User memory usr, uint256 amount, ERC20 token) internal broadcast(usr.pk) {
+        require(token.balanceOf(address(usr.aa)) >= amount, "not enough balance");
+        uint256 userBalanceBefore = token.balanceOf(usr.addr);
+        
+        usr.aa.withdrawToken(usr.addr, gho, amount);
+        require(token.balanceOf(usr.addr) == userBalanceBefore + amount, "not enough balance");
     }
 
     function run() external {
@@ -49,15 +69,13 @@ contract DeployFull is Script {
         alice =  createNewUserFromPk(vm.envUint("PRIVATE_KEY"), "alice", executor.addr);
         bob = createNewUserFromPk(vm.envUint("SECOND_PRIVATE_KEY"), "bob", executor.addr);
 
-
-        vm.startBroadcast(executor.pk);
-
-        deployGho();
-
-        vm.stopBroadcast();
+        gho = deployGho(executor.pk);
 
         giveGhoAllowance(alice);
         giveGhoAllowance(bob);
+
+        _deposit(alice, 100 * 10**18, gho);
+        _withdraw(alice, 100 * 10**18, gho);
 
     }
 }

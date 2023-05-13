@@ -21,7 +21,7 @@ import "./AppSpenderSigner.sol";
 
 */
 
-contract AppAccount is SimpleAccount, AppSpenderSigner, TokenHolder  {
+contract AppAccount is TokenHolder, SimpleAccount, AppSpenderSigner  {
     using UserOperationLib for UserOperation;
     using Address for address;
 
@@ -42,14 +42,6 @@ contract AppAccount is SimpleAccount, AppSpenderSigner, TokenHolder  {
     }
 
     // deposit function
-    function deposit(address benficiary, ERC20 token, uint256 amount) public {
-        _deposit(benficiary,token, amount);
-    }
-
-    function withdraw(address benficiary, ERC20 token, uint256 amount) public onlyOwner {
-        _withdraw(benficiary,token, amount);
-    }
-
     function _withdraw(address beneficiary, ERC20 token, uint256 amount) internal override(AppSpender,TokenHolder) {
         TokenHolder._withdraw(beneficiary,token, amount);
     }
