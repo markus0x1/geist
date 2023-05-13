@@ -27,6 +27,7 @@ struct ShareScreenView: View {
             ShareLink(item: url, message: Text("Hey fren, I'm sending you 100 GHO! 👻")) {
                 Label("Share", systemImage:  "square.and.arrow.up")
                     .font(.system(size: 24))
+                    // TODO: make white for demo (to hide)
                     .foregroundColor(GeistFontColor.title)
             }
             Spacer()
