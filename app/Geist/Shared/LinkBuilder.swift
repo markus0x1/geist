@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class UrlBuilder {
+final class LinkBuilder {
     private let host: String = "https://geist.xyz"
     private let keyword: String = "claim"
 
@@ -16,5 +16,5 @@ final class UrlBuilder {
         return url
     }
 
-    func parseUrl(_ url: String) {}
+    func parseLink(_ link: String) {}
 }
