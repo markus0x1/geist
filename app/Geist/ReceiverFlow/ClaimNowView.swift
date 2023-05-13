@@ -78,6 +78,13 @@ struct ClaimNowView: View {
                     withAnimation {
                         isLoading.toggle()
                     }
+                    Task.init {
+                        let manager = Manager.shared
+                        await manager.withdraw()
+                        DispatchQueue.main.async {
+                            isLoading = false
+                        }
+                    }
                 } label: {
                     Text("Claim Now")
                 }

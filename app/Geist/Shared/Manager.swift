@@ -70,12 +70,27 @@ extension Manager {
     func depositGho() async {
         let accountContract = EthereumAddress(Constants.aliceSender)
         let gho = EthereumAddress(Tokens.GHO)!
-        let amount = Utilities.parseToBigUInt("10", units: .ether)
+        let amount = Utilities.parseToBigUInt(String(Constants.amount), units: .ether)
         let parameters = [senderAccount.address, gho.address, amount] as [AnyObject]
         let contract = provider.web3.contract(GeistContract.abi, at: accountContract)!
         let writeOperation = contract.createWriteOperation("depositToken", parameters: parameters)!
         var tx = writeOperation.transaction
         tx.from = senderAccount.address
+        tx.chainID = provider.web3.provider.network!.chainID
+        print(tx)
+        let hash = await sendTx(tx)
+        print(hash ?? "n/a", "---")
+    }
+
+    func withdraw() async {
+        let accountContract = EthereumAddress(Constants.aliceSender)
+        let gho = EthereumAddress(Tokens.GHO)!
+        let amount = Utilities.parseToBigUInt(String(Constants.amount), units: .ether)
+        let parameters = [receiverAccount.address, gho.address, amount] as [AnyObject]
+        let contract = provider.web3.contract(GeistContract.abi, at: accountContract)!
+        let writeOperation = contract.createWriteOperation("withdrawToken", parameters: parameters)!
+        var tx = writeOperation.transaction
+        tx.from = receiverAccount.address
         tx.chainID = provider.web3.provider.network!.chainID
         print(tx)
         let hash = await sendTx(tx)

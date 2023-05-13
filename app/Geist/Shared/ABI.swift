@@ -8,5 +8,5 @@
 import Foundation
 
 struct GeistContract {
-    static let abi: String = "[{\"inputs\": [{\"internalType\": \"address\",\"name\": \"benficiary\",\"type\": \"address\"},{\"internalType\": \"contract ERC20\",\"name\": \"token\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"amount\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\",\"name\": \"depositToken\"}]"
+    static let abi: String = "[{\"inputs\": [{\"internalType\": \"address\",\"name\": \"benficiary\",\"type\": \"address\"},{\"internalType\": \"contract ERC20\",\"name\": \"token\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"amount\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\",\"name\": \"depositToken\"},{\"inputs\": [{\"internalType\": \"address\",\"name\": \"benficiary\",\"type\": \"address\"},{\"internalType\": \"contract ERC20\",\"name\": \"token\",\"type\": \"address\"},{\"internalType\": \"uint256\",\"name\": \"amount\",\"type\": \"uint256\"}],\"stateMutability\": \"nonpayable\",\"type\": \"function\",\"name\": \"withdrawToken\"}]"
 }
