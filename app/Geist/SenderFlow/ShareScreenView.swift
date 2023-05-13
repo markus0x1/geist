@@ -18,6 +18,8 @@ struct ShareScreenView: View {
                     let account = manager.senderAccount.address
                     let balance = await manager.balanceProvider.balanceOf(erc20Token: usdc, for: account)
                     print("BAL:", balance)
+                    let balanceEth = await manager.balanceProvider.balanceNative(for: account)
+                    print("ETH:", balanceEth)
                 }
             }
             .onAppear {

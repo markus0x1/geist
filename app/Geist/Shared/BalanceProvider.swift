@@ -21,6 +21,17 @@ final class BalanceProvider {
         self.provider = provider
     }
 
+    func balanceNative(for address: EthereumAddress) async -> BigUInt {
+        do {
+            let balance = try await provider.web3.eth.getBalance(for: address)
+            print(balance, "ETH balance")
+            return balance
+        } catch {
+            print("Error getting ETH balance", error)
+            return BigUInt(0)
+        }
+    }
+
     func balanceOf(erc20Token: EthereumAddress, for address: EthereumAddress) async -> BigUInt {
         let result = await readContract(erc20Token, account: address.address.lowercased())
         return (try? result.get()) ?? BigUInt(0)
