@@ -84,6 +84,8 @@ contract DeployFull is Script {
 
         aa.depositToken(aliceA, gho, 1e18);
 
+        console.log("Deployed Smart Contract wallet for %s at address: %s", "alice", aliceA, address(aa));
+        console.log("Deployed GHO token at address: %s", address(gho));
         vm.stopBroadcast();
         // executor = createNewUserFromPk(vm.envUint("PRIVATE_KEY"), "executor", address(0));
         // alice =  createNewUserFromPk(vm.envUint("PRIVATE_KEY"), "alice", executor.addr);
