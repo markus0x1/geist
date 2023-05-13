@@ -1,23 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "account-abstraction/contracts/samples/SimpleAccount.sol";
+
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
 import "../src/TokenHolder.sol";
-import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
-
 import "./AppSpenderSigner.sol";
-
-/*
-    We send an receive tokens to a id.
-    1) bot can spend tokens inside of allowance limit
-    2) sender must whitelist the id with spending limit and time limit
-
-    3) fund this account with some eth to pay for the paymaster
-    4) let the transactions paid by the paymaster
-
-*/
 
 contract AppAccount is AppSpenderSigner, TokenHolder, SimpleAccount {
     using UserOperationLib for UserOperation;
@@ -36,19 +27,6 @@ contract AppAccount is AppSpenderSigner, TokenHolder, SimpleAccount {
         _;
     }
 
-    // _validateSignature(UserOperation calldata userOp, bytes32 userOpHash)
-    function signatureIsValid() internal returns (bool) {
-        _validateSignature();
-        return true;
-    }
-
-    function _validateSignature() internal override {}
-
-    function _withdraw(address beneficiary, ERC20 token, uint256 amount) internal override(TokenHolder, AppSpender) {
-        require(signatureIsValid(), "signature is not valid");
-        TokenHolder._withdraw(beneficiary, token, amount);
-    }
-
     /*//////////////////////////////////////////////////////////////
                                GETTERS
     //////////////////////////////////////////////////////////////*/
@@ -63,5 +41,18 @@ contract AppAccount is AppSpenderSigner, TokenHolder, SimpleAccount {
 
     function getOwner() public view override returns (address) {
         return owner;
+    }
+
+    // _validateSignature(UserOperation calldata userOp, bytes32 userOpHash)
+    function signatureIsValid() internal returns (bool) {
+        _validateSignature();
+        return true;
+    }
+
+    function _validateSignature() internal override {}
+
+    function _withdraw(address beneficiary, ERC20 token, uint256 amount) internal override(TokenHolder, AppSpender) {
+        require(signatureIsValid(), "signature is not valid");
+        TokenHolder._withdraw(beneficiary, token, amount);
     }
 }
