@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		696D74352A0F77590065BFDD /* AccountProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D74342A0F77590065BFDD /* AccountProvider.swift */; };
 		B6B11BE52A0EC27D00152BDA /* GeistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BE42A0EC27D00152BDA /* GeistApp.swift */; };
 		B6B11BE72A0EC27D00152BDA /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BE62A0EC27D00152BDA /* StartView.swift */; };
 		B6B11BE92A0EC27D00152BDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6B11BE82A0EC27D00152BDA /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		696D74342A0F77590065BFDD /* AccountProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProvider.swift; sourceTree = "<group>"; };
 		B6B11BE12A0EC27D00152BDA /* Geist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B11BE42A0EC27D00152BDA /* GeistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeistApp.swift; sourceTree = "<group>"; };
 		B6B11BE62A0EC27D00152BDA /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -68,10 +70,10 @@
 			isa = PBXGroup;
 			children = (
 				B6FEDF3C2A0F7D7800BC740C /* Info.plist */,
+				B6B11BF52A0EC5E900152BDA /* Constants.swift */,
 				B6B11BE42A0EC27D00152BDA /* GeistApp.swift */,
 				B6B11BE62A0EC27D00152BDA /* StartView.swift */,
 				B6B11BF72A0EC5FE00152BDA /* Shared */,
-				B6B11BF52A0EC5E900152BDA /* Constants.swift */,
 				B6B11BF32A0EC5CC00152BDA /* SenderFlow */,
 				B6B11BF42A0EC5D300152BDA /* ReceiverFlow */,
 				B6B11BE82A0EC27D00152BDA /* Assets.xcassets */,
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				B6B11BF82A0EC60D00152BDA /* Manager.swift */,
+				696D74342A0F77590065BFDD /* AccountProvider.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				B6B11BE52A0EC27D00152BDA /* GeistApp.swift in Sources */,
 				B6B11BFD2A0EC6D600152BDA /* ShareSuccessView.swift in Sources */,
 				B6B11C012A0EC75000152BDA /* ClaimSuccessView.swift in Sources */,
+				696D74352A0F77590065BFDD /* AccountProvider.swift in Sources */,
 				B6B11BF62A0EC5E900152BDA /* Constants.swift in Sources */,
 				B6B11BF92A0EC60D00152BDA /* Manager.swift in Sources */,
 				B6B11BFB2A0EC6B000152BDA /* ShareScreenView.swift in Sources */,
