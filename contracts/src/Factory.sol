@@ -7,7 +7,6 @@ import "./AppAccount.sol";
 import "./GHO.sol";
 
 contract AccountFactory is Ownable {
-    
     IEntryPoint immutable ENTRY_POINT_ADDRESSS;
     IERC20 immutable token;
     address immutable executor;
@@ -18,11 +17,12 @@ contract AccountFactory is Ownable {
         executor = _executor;
     }
 
-
-    // function deployNewAppAccount(
-    //     address _owner) public returns (address) {
-    //     AppAccount appAccount = new AppAccount();
-    //     return address(appAccount);
-    // }
-
+    function deployNewAppAccount(address _owner) public returns (address) {
+        AppAccount appAccount = new AppAccount(
+            ENTRY_POINT_ADDRESSS,
+            executor,
+            _owner
+        );
+        return address(appAccount);
+    }
 }
