@@ -19,6 +19,7 @@ contract DeployFull is Script {
         address ENTRY_POINT_ADDRESSS = address(0);
         address addr = vm.addr(pk);
         AppAccount aa = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), executorAddress, addr);
+        console.log("Deployed Smart Contract wallet for %s at address: %s", tag, address(aa));
         return User(addr, pk, tag, aa);
 
     }
@@ -39,6 +40,7 @@ contract DeployFull is Script {
     function deployGho() internal {
         uint256  initalSupply = 100 * 10**18;
         gho = new GHO(initalSupply);
+        console.log("GHO address: %s", address(gho));
     }
 
     function run() external {
