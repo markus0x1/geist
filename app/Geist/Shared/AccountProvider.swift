@@ -37,6 +37,15 @@ final class AccountProvider {
             throw AccountProviderError.generatingMnemonicsFailed
         }
     }
+
+    // Returns wallet if successfully created, throws error otherwise
+    func importAccount(mnemonics: String) throws -> Wallet {
+        // This just checks if we can succesfully create a wallet from the mnemonics
+        guard let wallet = Wallet(type: .BIP39(mnemonic: mnemonics, password: AccountProvider.accountPassword)) else {
+            throw AccountProviderError.generatingWalletFailed
+        }
+        return wallet
+    }
 }
 
 struct Wallet {
