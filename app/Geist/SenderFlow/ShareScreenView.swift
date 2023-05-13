@@ -41,11 +41,10 @@ struct ShareScreenView: View {
                     .foregroundColor(GeistFontColor.title)
             }
             Spacer()
-            // TODO: make white for demo (to hide)
             Button("Share") {
-                print("share")
                 showNextScreen = true
             }
+            .foregroundColor(.white)
         }
         .padding()
         .toolbar(.hidden)
