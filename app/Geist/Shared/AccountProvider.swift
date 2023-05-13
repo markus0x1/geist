@@ -46,6 +46,31 @@ final class AccountProvider {
         }
         return wallet
     }
+
+    // Returns wallet if successfully created, throws error otherwise
+    func importAccount(privateKey: String) throws -> Wallet {
+        // This just checks if we can succesfully create a wallet from the mnemonics
+        guard let wallet = Wallet(type: .EthereumKeystoreV3(privateKey: privateKey, password: AccountProvider.accountPassword)) else {
+            throw AccountProviderError.generatingWalletFailed
+        }
+        return wallet
+    }
+}
+
+// MARK: - Convenience
+
+extension AccountProvider {
+    func createSenderAccount() throws -> Wallet {
+        let wallet = try! importAccount(privateKey: Constants.privateKey0)
+        print("Created sender account:", wallet.addressRaw)
+        return wallet
+    }
+
+    func createReceiverAccount() throws -> Wallet {
+        let wallet = try! importAccount(privateKey: Constants.privateKey1)
+        print("Created receiver account:", wallet.addressRaw)
+        return wallet
+    }
 }
 
 struct Wallet {
