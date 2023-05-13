@@ -24,16 +24,16 @@ struct ShareScreenView: View {
                 .foregroundColor(GeistFontColor.title)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
-//            Button("Share") {
-//                print("share")
-//                showNextScreen = true
-//            }
             ShareLink(item: url, message: Text("Hey fren, I'm sending you 100 GHO! 👻")) {
                 Label("Share", systemImage:  "square.and.arrow.up")
                     .font(.system(size: 24))
                     .foregroundColor(GeistFontColor.title)
             }
             Spacer()
+            Button("Share") {
+                print("share")
+                showNextScreen = true
+            }
         }
         .padding()
             .onTapGesture {
