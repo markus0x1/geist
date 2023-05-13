@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct SenderStartView: View {
+    @State private var showSend: Bool = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            VStack {
+                Text("👻")
+                    .font(.system(size: 24))
+                Text("1000 GHO")
+                    .font(.system(size: 36))
+                    .foregroundColor(GeistFontColor.title)
+                    .padding(.top, 16)
+                Text("0x")
+                    .font(.system(size: 24))
+                    .foregroundColor(GeistFontColor.secondaryTitle)
+            }
+            .padding(.top, 64)
+            Spacer()
+            Button("SEND GHO") {
+                print("send")
+                showSend = true
+            }
+        }
+        .toolbar(.hidden)
+        .navigationDestination(isPresented: $showSend) {
+            SenderInputView()
+        }
     }
 }
 
