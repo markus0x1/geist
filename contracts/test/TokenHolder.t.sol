@@ -30,7 +30,7 @@ contract BaseSetup is Test {
         bob = users[1];
         vm.label(bob, "Bob");
 
-       // token = new ERC20(1e18);
+        token = new GHO(1e18);
         holder = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS),  executor, bob);
 
         console.log("deployed token with symbol", token.symbol());
