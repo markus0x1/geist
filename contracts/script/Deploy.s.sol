@@ -7,25 +7,55 @@ import { GHO } from "../src/GHO.sol";
 
 import "forge-std/Script.sol";
 
-contract DeployFull is Script {
-    string constant PK = "PRIVATE_KEY";
-    uint256 initalSupply = 100 * 10**18;
-    AppAccount public account;
+struct User {
+    address addr;
+    uint256 pk;
+    string tag;
+    AppAccount aa;
+}
 
-    address constant ENTRY_POINT_ADDRESSS = address(0);
-    address owner;
-    address executor;
+contract DeployFull is Script {
+    function createNewUserFromPk(uint256 pk, string memory tag, address executorAddress) internal returns (User memory) {
+        address ENTRY_POINT_ADDRESSS = address(0);
+        address addr = vm.addr(pk);
+        AppAccount aa = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), executorAddress, addr);
+        return User(addr, pk, tag, aa);
+
+    }
+
     GHO gho;
     
-    function run() external {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
+    User alice;
+    User bob;
+    User executor;
 
-        gho = new GHO(initalSupply);
-        account = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), owner, executor);
-
-        console.log("GHO address: %s", address(gho));
-        console.log("account address: %s", address(account));
+    function giveGhoAllowance(User memory usr) internal {
+        vm.startBroadcast(usr.pk);
+        gho.approve(address(alice.aa), type(uint256).max);
+        gho.approve(address(bob.aa), type(uint256).max);
         vm.stopBroadcast();
+    }
+
+    function deployGho() internal {
+        uint256  initalSupply = 100 * 10**18;
+        gho = new GHO(initalSupply);
+    }
+
+    function run() external {
+
+        executor = createNewUserFromPk(vm.envUint("PRIVATE_KEY"), "executor", address(0));
+        alice =  createNewUserFromPk(vm.envUint("PRIVATE_KEY"), "alice", executor.addr);
+        bob = createNewUserFromPk(vm.envUint("SECOND_PRIVATE_KEY"), "bob", executor.addr);
+
+
+        vm.startBroadcast(executor.pk);
+
+        deployGho();
+
+        vm.stopBroadcast();
+
+        giveGhoAllowance(alice);
+        giveGhoAllowance(bob);
+
     }
 }
