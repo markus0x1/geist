@@ -17,6 +17,7 @@ struct StartView: View {
                 NavigationLink("Send GHO") {
                     ShareScreenView()
                 }
+                .padding()
                 NavigationLink(
                     destination: ClaimNowView(),
                     isActive: $claimStarted)
