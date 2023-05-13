@@ -40,7 +40,7 @@ struct SenderStartView: View {
                 }
                 .padding(.top, 32)
                 Spacer()
-                Button("Send GHO to your fren") {
+                Button("Send GHO") {
                     print("send")
                     showSend = true
                 }
