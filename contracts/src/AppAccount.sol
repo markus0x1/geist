@@ -4,6 +4,8 @@ pragma solidity ^0.8.13;
 import "account-abstraction/contracts/samples/SimpleAccount.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "../src/TokenHolder.sol";
+import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 // use cool stuff https://github.com/web3well/bls-wallet
 //               https://github.com/eth-infinitism/account-abstraction
@@ -19,7 +21,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 */
 
-contract AppAccount is SimpleAccount {
+contract AppAccount is SimpleAccount, TokenHolder {
     using UserOperationLib for UserOperation;
     using Address for address;
 
@@ -48,11 +50,12 @@ contract AppAccount is SimpleAccount {
 
     constructor(
         IEntryPoint anEntryPoint,
+        address _executor,
         address _owner,
-        address _executor
-    ) SimpleAccount(anEntryPoint) {
-        owner = _owner;
+        GHO _token
+    ) SimpleAccount(anEntryPoint)  TokenHolder(_token) {
         executor = _executor;
+        owner = _owner;
     }
 
     modifier onlyExecutor() {
@@ -61,13 +64,17 @@ contract AppAccount is SimpleAccount {
     }
 
     // deposit function
-    function deposit() public {}
-
-    function withdraw(uint256 amount) public {
-        _withdraw(amount, msg.sender);
+    function deposit(address benficiary, uint256 amount) public {
+        _deposit(benficiary, amount);
     }
 
-    function _withdraw(uint256 amount, address beneficiary) internal {}
+    function withdraw(address benficiary, uint256 amount) public onlyOwner {
+        _withdraw(benficiary, amount);
+    }
+
+    function _withdraw(address beneficiary, uint256 amount) internal override {
+        super._withdraw(beneficiary, amount);
+    }
 
     event ApprovedId(
         uint256 indexed id,
@@ -106,7 +113,7 @@ contract AppAccount is SimpleAccount {
         allowances[id].status = Status.Executed;
         
         // interactions
-        _withdraw( allowance.amount, msg.sender);
+        _withdraw(msg.sender, allowance.amount);
     }
 
     function cancelId(uint256 id) public onlyExecutor {
