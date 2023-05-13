@@ -10,7 +10,7 @@ import Web3Core
 
 struct ShareScreenView: View {
     var url: URL = URL(string: "https://gho.xyz")!
-    private let backgroundColor: Color = GeistColor.purpleLight.opacity(0.2)
+    private let backgroundColor: Color = GeistColor.purpleLight.opacity(0.5)
     @State private var showNextScreen: Bool = false
     var body: some View {
         ZStack {

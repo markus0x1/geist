@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SenderInputView: View {
+    private let backgroundColor: Color = GeistColor.purpleLight.opacity(0.5)
     @State private var isGenerating: Bool = false
     @State private var showNextScreen: Bool = false
     private var url: URL
@@ -16,36 +17,41 @@ struct SenderInputView: View {
         self.url = linkBuilder.generateLink(for: "0xgeist")
     }
     var body: some View {
-        VStack {
-            Text("Send \(Constants.amount) GHO 👻")
-                .font(.system(size: 24))
-                .foregroundColor(GeistFontColor.title)
-                .bold()
-                .multilineTextAlignment(.center)
-                .padding(.top, 64)
-                .padding(.bottom, 16)
-            Spacer()
-            if isGenerating {
-                Text("Generating a link to share...")
+        ZStack {
+            backgroundColor.edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("Send \(Constants.amount) GHO 👻")
                     .font(.system(size: 24))
                     .foregroundColor(GeistFontColor.title)
+                    .bold()
                     .multilineTextAlignment(.center)
-                ProgressView()
-                    .foregroundColor(GeistFontColor.secondaryTitle)
-                    .progressViewStyle(.circular)
-            }
-            Spacer()
-            Button("SEND GHO") {
-                Task.init {
-                    if (isGenerating) { return }
-                    isGenerating = true
-                    // deposit + generate ID
-                    // TODO: generate ID
-                    // TOOD: deposit
-                    try await Task.sleep(nanoseconds: 2_000_000_000)
-                    showNextScreen = true
+                    .padding(.top, 64)
+                    .padding(.bottom, 16)
+                Spacer()
+                if isGenerating {
+                    Text("Generating a link to share...")
+                        .font(.system(size: 24))
+                        .foregroundColor(GeistFontColor.title)
+                        .multilineTextAlignment(.center)
+                    ProgressView()
+                        .foregroundColor(GeistFontColor.secondaryTitle)
+                        .progressViewStyle(.circular)
                 }
+                Spacer()
+                Button("SEND GHO") {
+                    Task.init {
+                        if (isGenerating) { return }
+                        isGenerating = true
+                        // deposit + generate ID
+                        // TODO: generate ID
+                        // TOOD: deposit
+                        try await Task.sleep(nanoseconds: 2_000_000_000)
+                        showNextScreen = true
+                    }
+                }
+                .buttonStyle(rounded(backgroundColor: GeistColor.purpleDark, disabledBackgroundColor: GeistColor.gray))
             }
+            .padding()
         }
         .toolbar(.hidden)
         .navigationDestination(isPresented: $showNextScreen) {
