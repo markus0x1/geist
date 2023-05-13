@@ -6,6 +6,7 @@ import {stdStorage, StdStorage, Test} from "forge-std/Test.sol";
 
 import {Utils} from "../test/Utils.t.sol";
 import {GHO} from "../src/Token.sol";
+import {TokenHolder} from "../src/TokenHolder.sol";
 
 contract BaseSetup is Test {
     Utils internal utils;
@@ -15,6 +16,7 @@ contract BaseSetup is Test {
     address internal bob;
 
     GHO token;
+    TokenHolder holder;
 
     function setUp() public virtual {
         utils = new Utils();
@@ -26,6 +28,7 @@ contract BaseSetup is Test {
         vm.label(bob, "Bob");
 
         token = new GHO(1e18);
+        holder = new TokenHolder(token, bob);
 
         console.log("deployed token with symbol", token.symbol());
     }
@@ -35,21 +38,17 @@ contract BaseSetup is Test {
         token.transfer(alice, 1e18);
         assertEq(token.balanceOf(address(this)), 0);
         assertEq(token.balanceOf(alice), 1e18);
+        
 
-        assertEq(token.balanceOf(bob), 0);
         vm.startPrank(alice);
-        token.transfer(bob, 1e18);
+        token.approve(address(holder), 1e18);
+        holder.deposit(alice, 1e18);
         vm.stopPrank();
+
         assertEq(token.balanceOf(alice), 0);
-        assertEq(token.balanceOf(bob), 1e18);
-
-        // bob calls token.approve()approve(address spender, uint256 amount)
+        assertEq(token.balanceOf(bob), 0);
         vm.prank(bob);
-        token.approve(alice, 1e18);
-        // alice calls token.transferFrom() transferFrom(address from, address to, uint256 amount)
-        vm.prank(alice);
-        token.transferFrom(bob, alice, 1e18);
-
-        deal(address(token), bob, 1e18);
+        holder.withdraw(bob, 1e18);
+        assertEq(token.balanceOf(bob), 1e18);
     }
 }
