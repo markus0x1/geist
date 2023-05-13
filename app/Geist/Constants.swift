@@ -9,10 +9,10 @@ import Foundation
 
 enum Constants {
     static let amount = 10
-    static let providerUrl = "https://rpc.tenderly.co/fork/c1bacb8b-28af-448f-8155-97c479e9177d"
-//    static let providerUrl = "http://127.0.0.1:8545/"
+//    static let providerUrl = "https://rpc.tenderly.co/fork/c1bacb8b-28af-448f-8155-97c479e9177d"
+    static let providerUrl = "http://127.0.0.1:8545/"
     // AA contracts
-    static let aliceSender = "0xdaE97900D4B184c5D2012dcdB658c008966466DD"
+    static let aliceSender = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
     static let bobReceiver = ""
     // Hardhat accounts
     static let privateKey0 = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
@@ -20,5 +20,5 @@ enum Constants {
 }
 
 enum Tokens {
-    static let GHO = "0xfd3Cb0fFE63B1fDBBE257b9AdFCCC065f300C829"
+    static let GHO = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
 }

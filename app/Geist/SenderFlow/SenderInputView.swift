@@ -45,7 +45,8 @@ struct SenderInputView: View {
                         // deposit + generate ID
                         // TODO: generate ID
                         // TOOD: deposit
-                        try await Task.sleep(nanoseconds: 2_000_000_000)
+                        let manager = Manager.shared
+                        await manager.depositGho()
                         showNextScreen = true
                     }
                 }

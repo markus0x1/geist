@@ -50,32 +50,28 @@ extension Manager {
 
     func signMessage() {}
 
-    func transfer() async {
-        let accountContract = EthereumAddress("0xe7f1725e7734ce288f8367e1bb143e90bb3f0512")
-        let gho = EthereumAddress("0x5FbDB2315678afecb367f032d93F642f64180aa3")!
-        let amount = Utilities.parseToBigUInt("10", units: .ether)
-        print(amount)
-        let parameters = [gho.address, amount] as [AnyObject]
-        let web3Provider = provider.web3.provider
-        let contract = provider.web3.contract(Web3.Utils.erc20ABI, at: gho)!
-        let writeOperation = contract.createWriteOperation("transfer", parameters: parameters)!
-        var tx = writeOperation.transaction
-        tx.from = senderAccount.address
-        tx.chainID = provider.web3.provider.network!.chainID
-        print(tx)
-        let hash = await sendTx(tx)
-        print(hash ?? "n/a", "---")
-    }
+//    func transfer() async {
+//        let accountContract = EthereumAddress("0xe7f1725e7734ce288f8367e1bb143e90bb3f0512")
+//        let gho = EthereumAddress("0x5FbDB2315678afecb367f032d93F642f64180aa3")!
+//        let amount = Utilities.parseToBigUInt("10", units: .ether)
+//        print(amount)
+//        let parameters = [gho.address, amount] as [AnyObject]
+//        let web3Provider = provider.web3.provider
+//        let contract = provider.web3.contract(Web3.Utils.erc20ABI, at: gho)!
+//        let writeOperation = contract.createWriteOperation("transfer", parameters: parameters)!
+//        var tx = writeOperation.transaction
+//        tx.from = senderAccount.address
+//        tx.chainID = provider.web3.provider.network!.chainID
+//        print(tx)
+//        let hash = await sendTx(tx)
+//        print(hash ?? "n/a", "---")
+//    }
 
     func depositGho() async {
-//        await transfer()
-//        return
-
         let accountContract = EthereumAddress(Constants.aliceSender)
         let gho = EthereumAddress(Tokens.GHO)!
         let amount = Utilities.parseToBigUInt("10", units: .ether)
         let parameters = [senderAccount.address, gho.address, amount] as [AnyObject]
-        let web3Provider = provider.web3.provider
         let contract = provider.web3.contract(GeistContract.abi, at: accountContract)!
         let writeOperation = contract.createWriteOperation("depositToken", parameters: parameters)!
         var tx = writeOperation.transaction
@@ -86,7 +82,7 @@ extension Manager {
         print(hash ?? "n/a", "---")
     }
 
-    func sendTx(_ transaction: CodableTransaction) async -> String? {
+    private func sendTx(_ transaction: CodableTransaction) async -> String? {
         do {
             let web3Provider = provider.web3.provider
             let keystore = web3Provider.attachedKeystoreManager!
@@ -94,9 +90,7 @@ extension Manager {
             // resolve - to determine nonce + gas
             let resolver = PolicyResolver(provider: provider.web3.provider)
             try await resolver.resolveAll(for: &tx)
-            print(tx.gasLimit, tx.gasPrice)
             tx.gasPrice = BigUInt(1000000000)
-            print(tx)
             // sign + encode
             let password = AccountProvider.accountPassword
             try Web3Signer.signTX(transaction: &tx, keystore: keystore, account: tx.from!, password: password)
