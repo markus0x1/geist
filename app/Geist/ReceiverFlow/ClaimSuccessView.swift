@@ -38,10 +38,11 @@ struct ClaimSuccessView: View {
             }
             .padding(.top, 64)
             Spacer()
-            Button("SEND GHO") {
+            Button("DONE") {
                 print("send")
                 showSend = true
             }
+            .buttonStyle(rounded(backgroundColor: GeistColor.purpleDark, disabledBackgroundColor: GeistColor.gray))
         }
         .padding()
         .task {
