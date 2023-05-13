@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct SenderInputView: View {
+    @State private var showNextScreen: Bool = false
     var body: some View {
-        Text("Send some GHO 👻")
+        VStack {
+            Text("Send some GHO 👻")
+            Spacer()
+            Button("SEND GHO") {
+                print("send")
+                showNextScreen = true
+            }
+        }
+        .toolbar(.hidden)
+        .navigationDestination(isPresented: $showNextScreen) {
+            ShareScreenView()
+        }
     }
 }
 
