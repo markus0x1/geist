@@ -4,7 +4,6 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import "../src/AppAccount.sol";
 
-
 contract AppAccountTest is Test {
     AppAccount public account;
 
@@ -15,7 +14,6 @@ contract AppAccountTest is Test {
 
     function setUp() public {
         account = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), owner, executor);
-
     }
 
     function testAccountInitialized() public {
