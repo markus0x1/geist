@@ -5,7 +5,7 @@ import {console} from "forge-std/console.sol";
 import {stdStorage, StdStorage, Test} from "forge-std/Test.sol";
 
 import {Utils} from "../test/Utils.t.sol";
-import {GHO} from "../src/Token.sol";
+import {GHO} from "../src/GHO.sol";
 import "../src/AppAccount.sol";
 
 contract BaseSetup is Test {
