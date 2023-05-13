@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/web3swift-team/web3swift.git",
       "state" : {
-        "revision" : "16a2915ebd1a0fd33bf0a0ed5a9874909a6e187d",
-        "version" : "3.1.2"
+        "branch" : "develop",
+        "revision" : "d7f5a95d6fbb5e03d1724afa666d7602abb4de88"
       }
     }
   ],

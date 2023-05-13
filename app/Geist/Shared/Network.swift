@@ -9,6 +9,7 @@ import Foundation
 
 enum ChainId: UInt {
     case Ethereum = 1
+    case Localhost = 31337
 }
 
 struct Network {
@@ -26,6 +27,13 @@ enum EtherumNetwork {
     static var mainnet: Network {
         return Network(
             chainId: ChainId.Ethereum,
+            rpc: Constants.providerUrl
+        )
+    }
+
+    static var localhost: Network {
+        return Network(
+            chainId: ChainId.Localhost,
             rpc: Constants.providerUrl
         )
     }

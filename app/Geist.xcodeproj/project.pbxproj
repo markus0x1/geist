@@ -15,6 +15,7 @@
 		6998659D2A0F988C002A837D /* SenderStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6998659C2A0F988C002A837D /* SenderStartView.swift */; };
 		6998659F2A0F989A002A837D /* SenderInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6998659E2A0F989A002A837D /* SenderInputView.swift */; };
 		699865A12A0FAB0C002A837D /* LinkBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699865A02A0FAB0C002A837D /* LinkBuilder.swift */; };
+		699865A32A0FD0CC002A837D /* ABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699865A22A0FD0CC002A837D /* ABI.swift */; };
 		B6B11BE52A0EC27D00152BDA /* GeistApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BE42A0EC27D00152BDA /* GeistApp.swift */; };
 		B6B11BE72A0EC27D00152BDA /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B11BE62A0EC27D00152BDA /* StartView.swift */; };
 		B6B11BE92A0EC27D00152BDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6B11BE82A0EC27D00152BDA /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		6998659C2A0F988C002A837D /* SenderStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderStartView.swift; sourceTree = "<group>"; };
 		6998659E2A0F989A002A837D /* SenderInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderInputView.swift; sourceTree = "<group>"; };
 		699865A02A0FAB0C002A837D /* LinkBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkBuilder.swift; sourceTree = "<group>"; };
+		699865A22A0FD0CC002A837D /* ABI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABI.swift; sourceTree = "<group>"; };
 		B6B11BE12A0EC27D00152BDA /* Geist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Geist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B11BE42A0EC27D00152BDA /* GeistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeistApp.swift; sourceTree = "<group>"; };
 		B6B11BE62A0EC27D00152BDA /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		B6B11BF72A0EC5FE00152BDA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				699865A22A0FD0CC002A837D /* ABI.swift */,
 				699865A02A0FAB0C002A837D /* LinkBuilder.swift */,
 				B6B11BF82A0EC60D00152BDA /* Manager.swift */,
 				696D74342A0F77590065BFDD /* AccountProvider.swift */,
@@ -222,6 +225,7 @@
 				B6B11BFD2A0EC6D600152BDA /* ShareSuccessView.swift in Sources */,
 				6998659F2A0F989A002A837D /* SenderInputView.swift in Sources */,
 				696D74372A0F7FE80065BFDD /* BalanceProvider.swift in Sources */,
+				699865A32A0FD0CC002A837D /* ABI.swift in Sources */,
 				B6B11C012A0EC75000152BDA /* ClaimSuccessView.swift in Sources */,
 				6998659D2A0F988C002A837D /* SenderStartView.swift in Sources */,
 				696D74352A0F77590065BFDD /* AccountProvider.swift in Sources */,
@@ -452,8 +456,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/web3swift-team/web3swift.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

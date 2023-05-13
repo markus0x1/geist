@@ -14,6 +14,17 @@ struct ShareScreenView: View {
     var body: some View {
         VStack {
             Spacer()
+            Text(verbatim: "https://geist.xyz/claim?0x...")
+                .font(.system(size: 12))
+                .foregroundColor(GeistFontColor.secondaryTitle)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+                .padding(.vertical, 16)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(GeistFontColor.borderSecondary, lineWidth: 1)
+                )
+                .padding(.vertical, 16)
             Text("Link generated.")
                 .font(.system(size: 24))
                 .foregroundColor(GeistFontColor.secondaryTitle)
@@ -27,41 +38,19 @@ struct ShareScreenView: View {
             ShareLink(item: url, message: Text("Hey fren, I'm sending you 100 GHO! 👻")) {
                 Label("Share", systemImage:  "square.and.arrow.up")
                     .font(.system(size: 24))
-                    // TODO: make white for demo (to hide)
                     .foregroundColor(GeistFontColor.title)
             }
             Spacer()
+            // TODO: make white for demo (to hide)
             Button("Share") {
                 print("share")
                 showNextScreen = true
             }
         }
         .padding()
-            .onTapGesture {
-                Task.init {
-                    let usdc = EthereumAddress("0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48")!
-                    let manager = Manager.shared
-                    let account = manager.senderAccount.address
-                    let balance = await manager.balanceProvider.balanceOf(erc20Token: usdc, for: account)
-                    print("BAL:", balance)
-                    let balanceEth = await manager.balanceProvider.balanceNative(for: account)
-                    print("ETH:", balanceEth)
-                }
-            }
-            .onAppear {
-//                let accountProvider = AccountProvider()
-//                let wallet = try! accountProvider.importAccount(privateKey: "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80")
-//                print(wallet)
-//                let sender = try! accountProvider.createSenderAccount()
-//                let receiver = try! accountProvider.createReceiverAccount()
-                Task.init {
-                    let manager = Manager.shared
-                    await manager.configSender()
-                }
-            }
-            .toolbar(.hidden)
-            .navigationDestination(isPresented: $showNextScreen) {
-                ShareSuccessView(amount: 101)
-            }
+        .toolbar(.hidden)
+        .navigationDestination(isPresented: $showNextScreen) {
+            ShareSuccessView(amount: 101)
+        }
     }
 }
