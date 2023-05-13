@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShareSuccessView: View {
-    var amount: UInt = 100
+    var amount = Constants.amount
     var body: some View {
         ZStack {
             GeistColor.purpleLight2.edgesIgnoringSafeArea(.all)

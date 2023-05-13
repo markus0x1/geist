@@ -14,7 +14,7 @@ struct ShareScreenView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text(verbatim: "https://geist.xyz/claim?0x...")
+            Text(verbatim: "https://geist.xyz/claim?id=0x...")
                 .font(.system(size: 12))
                 .foregroundColor(GeistFontColor.secondaryTitle)
                 .multilineTextAlignment(.center)
@@ -35,7 +35,7 @@ struct ShareScreenView: View {
                 .foregroundColor(GeistFontColor.title)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
-            ShareLink(item: url, message: Text("Hey fren, I'm sending you 100 GHO! 👻")) {
+            ShareLink(item: url, message: Text("Hey fren, I'm sending you \(Constants.amount) GHO! 👻")) {
                 Label("Share", systemImage:  "square.and.arrow.up")
                     .font(.system(size: 24))
                     .foregroundColor(GeistFontColor.title)
@@ -49,7 +49,7 @@ struct ShareScreenView: View {
         .padding()
         .toolbar(.hidden)
         .navigationDestination(isPresented: $showNextScreen) {
-            ShareSuccessView(amount: 101)
+            ShareSuccessView(amount: Constants.amount)
         }
     }
 }
