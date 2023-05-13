@@ -9,15 +9,34 @@ import SwiftUI
 import Web3Core
 
 struct ShareScreenView: View {
+    var url: URL = URL(string: "https://gho.xyz")!
     @State private var showNextScreen: Bool = false
     var body: some View {
         VStack {
-            Text("Link generated. Now send it to your fren.")
+            Spacer()
+            Text("Link generated.")
+                .font(.system(size: 24))
+                .foregroundColor(GeistFontColor.secondaryTitle)
+                .multilineTextAlignment(.center)
+                .padding(.top, 16)
+            Text("Now send it to your fren.")
+                .font(.system(size: 24))
+                .foregroundColor(GeistFontColor.title)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 16)
+            ShareLink(item: url, message: Text("Hey fren, I'm sending you 100 GHO! 👻")) {
+                Label("Share", systemImage:  "square.and.arrow.up")
+                    .font(.system(size: 24))
+                    // TODO: make white for demo (to hide)
+                    .foregroundColor(GeistFontColor.title)
+            }
+            Spacer()
             Button("Share") {
                 print("share")
                 showNextScreen = true
             }
         }
+        .padding()
             .onTapGesture {
                 Task.init {
                     let usdc = EthereumAddress("0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48")!
@@ -42,7 +61,7 @@ struct ShareScreenView: View {
             }
             .toolbar(.hidden)
             .navigationDestination(isPresented: $showNextScreen) {
-                ShareSuccessView()
+                ShareSuccessView(amount: 101)
             }
     }
 }
