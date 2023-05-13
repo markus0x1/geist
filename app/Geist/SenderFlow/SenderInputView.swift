@@ -11,7 +11,21 @@ struct SenderInputView: View {
     @State private var showNextScreen: Bool = false
     var body: some View {
         VStack {
-            Text("Send some GHO 👻")
+            Text("Send 101 GHO 👻")
+                .font(.system(size: 24))
+                .foregroundColor(GeistFontColor.title)
+                .bold()
+                .multilineTextAlignment(.center)
+                .padding(.top, 64)
+                .padding(.bottom, 16)
+            Spacer()
+            Text("Generating a link to share...")
+                .font(.system(size: 24))
+                .foregroundColor(GeistFontColor.title)
+                .multilineTextAlignment(.center)
+            ProgressView()
+                .foregroundColor(GeistFontColor.secondaryTitle)
+                .progressViewStyle(.circular)
             Spacer()
             Button("SEND GHO") {
                 print("send")
