@@ -21,19 +21,50 @@ import "./AppSpenderSigner.sol";
 
 */
 
-contract AppAccount is TokenHolder, SimpleAccount, AppSpenderSigner  {
-    using UserOperationLib for UserOperation;
-    using Address for address;
-
+contract AppAccount   {
+    // using UserOperationLib for UserOperation;
+    //  using Address for address;
+    using SafeERC20 for ERC20;
     address public executor;
+    address public owner;
 
     constructor(
         IEntryPoint anEntryPoint,
         address _executor,
         address _owner
-    ) SimpleAccount(anEntryPoint)  TokenHolder() {
+    )  {
         executor = _executor;
         owner = _owner;
+    }
+
+   event Deposit(address indexed sender, ERC20 token, uint256 amount);
+    event Withdraw(address indexed beneficiary, ERC20 token, uint256 amount);
+
+    function depositToken(
+        address sender,
+        ERC20 token,
+        uint256 amount
+    ) public {
+        token.safeTransferFrom(sender, address(this), amount);
+        emit Deposit(sender, token, amount);
+    }
+
+    function withdrawToken(
+        address sender,
+        ERC20 token,
+        uint256 amount
+    ) public {
+        _withdraw(sender, token, amount);
+        emit Withdraw(sender, token, amount);
+    }
+
+
+    function _withdraw(
+        address beneficiary,
+        ERC20 token,
+        uint256 amount
+    ) internal virtual {
+        token.safeTransfer(beneficiary, amount);
     }
 
     modifier onlyExecutor() {
@@ -41,13 +72,9 @@ contract AppAccount is TokenHolder, SimpleAccount, AppSpenderSigner  {
         _;
     }
 
-    // deposit function
-    function _withdraw(address beneficiary, ERC20 token, uint256 amount) internal override(AppSpender,TokenHolder) {
-        TokenHolder._withdraw(beneficiary,token, amount);
-    }
 
     // _validateSignature(UserOperation calldata userOp, bytes32 userOpHash)
-    function _validateSignature() internal virtual override {}
+    function _validateSignature() internal virtual {}
     /*//////////////////////////////////////////////////////////////
                                CRYPTOGRAPHY
     //////////////////////////////////////////////////////////////*/
@@ -74,16 +101,16 @@ contract AppAccount is TokenHolder, SimpleAccount, AppSpenderSigner  {
                                GETTERS
     //////////////////////////////////////////////////////////////*/
 
-    function getHash(
-        UserOperation calldata userOp
-    ) public pure returns (bytes32) {
-        return userOp.hash();
-    }
+    // function getHash(
+    //     UserOperation calldata userOp
+    // ) public pure returns (bytes32) {
+    //     return userOp.hash();
+    // }
 
-    function getExecutor() public view override returns (address) {
+    function getExecutor() public view returns (address) {
         return executor;
     }
-    function getOwner() public view override returns (address) {
+    function getOwner() public view returns (address) {
         return owner;
     }
 }

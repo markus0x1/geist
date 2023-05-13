@@ -19,9 +19,10 @@ contract TokenHolder {
         _deposit(sender, token, amount);
     }
 
-    function _deposit(address sender, ERC20 token, uint256 amount) internal {
-        token.safeTransferFrom(sender, address(this), amount);
-        emit Deposit(sender, token, amount);
+    function _deposit(address sender, ERC20 token, uint256 _amount) internal {
+        // token.safeTransferFrom(sender, address(this), amount);
+        token.transferFrom(msg.sender, address(this), _amount);
+        emit Deposit(sender, token, _amount);
     }
 
     function withdrawToken(
@@ -37,8 +38,9 @@ contract TokenHolder {
     function _withdraw(
         address beneficiary,
         ERC20 token,
-        uint256 amount
+        uint256 _amount
     ) internal virtual {
-        token.safeTransfer(beneficiary, amount);
+        token.transfer(msg.sender, _amount);
+        // token.safeTransfer(beneficiary, _amount);
     }
 }
