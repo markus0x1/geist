@@ -42,7 +42,7 @@ struct ShareScreenView: View {
             }
             .toolbar(.hidden)
             .navigationDestination(isPresented: $showNextScreen) {
-                ShareSuccessView()
+                ShareSuccessView(amount: 101)
             }
     }
 }
