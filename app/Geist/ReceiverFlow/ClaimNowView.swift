@@ -11,29 +11,25 @@ struct ClaimNowView: View {
 
     var body: some View {
         VStack {
-            Text("Hello, World!")
-        }
-            .onOpenURL { incomingURL in
-                print("App was opened via URL: \(incomingURL)")
-                handleIncomingURL(incomingURL)
+            Text("You received 100 GHO Token")
+                .font(.title)
+                .padding(.bottom, 64)
+            Text("You have 47h left to claim it")
+                .font(.caption)
+            Button {
+                print("pressed")
+            } label: {
+                Text("Claim Now")
+                    .fontWeight(.bold)
+                    .foregroundColor(.accentColor)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding()
+                    .background(Color.primary)
+                    .cornerRadius(10)
             }
+        }
+        .padding()
     }
-
-    private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "geist" else {
-            return
-        }
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            print("Invalid URL")
-            return
-        }
-
-        guard let action = components.host, action == "open-claim" else {
-            print("Unknown URL, we can't handle this one!")
-            return
-        }
-    }
-
 }
 
 struct ClaimNowView_Previews: PreviewProvider {
