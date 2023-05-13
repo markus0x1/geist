@@ -35,6 +35,7 @@
 		B6B11BFC2A0EC6D600152BDA /* ShareSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSuccessView.swift; sourceTree = "<group>"; };
 		B6B11BFE2A0EC72800152BDA /* ClaimNowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimNowView.swift; sourceTree = "<group>"; };
 		B6B11C002A0EC75000152BDA /* ClaimSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimSuccessView.swift; sourceTree = "<group>"; };
+		B6FEDF3C2A0F7D7800BC740C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +69,7 @@
 		B6B11BE32A0EC27D00152BDA /* Geist */ = {
 			isa = PBXGroup;
 			children = (
+				B6FEDF3C2A0F7D7800BC740C /* Info.plist */,
 				B6B11BF52A0EC5E900152BDA /* Constants.swift */,
 				B6B11BE42A0EC27D00152BDA /* GeistApp.swift */,
 				B6B11BE62A0EC27D00152BDA /* StartView.swift */,
@@ -329,6 +331,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Geist/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -367,6 +370,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Geist/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
