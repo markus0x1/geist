@@ -45,6 +45,7 @@ contract DeployFull is Script {
     function deployGho(uint256 pk) internal  broadcast(pk) returns (ERC20){
         uint256 initalSupply = 100 * 10**18;
         GHO _gho = new GHO(initalSupply);
+        console.log("Deployed GHO token at address: %s", address(_gho));
         return ERC20(address(_gho));
     }
 
