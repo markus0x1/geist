@@ -10,6 +10,7 @@ import SwiftUI
 struct StartView: View {
 
     @State var claimStarted = false
+    @State var components: URLComponents = URLComponents()
 
     var body: some View {
         NavigationStack {
@@ -19,7 +20,7 @@ struct StartView: View {
                 }
                 .padding()
                 NavigationLink(
-                    destination: ClaimNowView(),
+                    destination: ClaimNowView(components: components),
                     isActive: $claimStarted)
                 {
                     Label("Receive GHO", systemImage: "giftcard")
@@ -38,19 +39,16 @@ struct StartView: View {
     }
 
     private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "geist" || url.scheme == "https"  else {
+        guard url.scheme == "https" else {
             return
         }
+
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             print("Invalid URL")
             return
         }
 
-        guard let action = components.host, action == "claim" else {
-            print("Unknown URL, we can't handle this one!")
-            return
-        }
-
+        self.components = components
         claimStarted = true
     }
 }

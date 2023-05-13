@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ClaimNowView: View {
 
+    var components: URLComponents
+
     var body: some View {
         VStack {
             Text("You received 100 GHO Token")
@@ -34,6 +36,6 @@ struct ClaimNowView: View {
 
 struct ClaimNowView_Previews: PreviewProvider {
     static var previews: some View {
-        ClaimNowView()
+        ClaimNowView(components: URLComponents())
     }
 }

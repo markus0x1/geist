@@ -9,22 +9,27 @@ import Foundation
 
 final class LinkBuilder {
 
-    enum LinkStyle {
-        case universal
-        case deeplink
-    }
+    private let scheme = "https://"
+    private let universalLinkHost = "eth-global-lisboa.vercel.app"
+    private let keyword = "claim"
 
-    private let universalLinkHost: String = "https://eth-global-lisboa.vercel.app/"
-    private let deeplink: String = "geist://"
-    private let keyword: String = "claim"
+    func generateLink(for id: String) -> URL {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "eth-global-lisboa.vercel.app"
+        components.path = "/claim"
 
-    func generateLink(for id: String, linkStyle: LinkStyle) -> String {
-        switch linkStyle {
-        case .universal:
-            return "\(universalLinkHost)/\(keyword)?\(id)"
-        case .deeplink:
-            return "\(deeplink)\(keyword)?\(id)"
+        components.queryItems = [
+            URLQueryItem(name: "id", value: "\(id)"),
+        ]
+
+        guard let url = components.url else {
+            fatalError("Could not create URL from components")
         }
+
+        print("Created URL: \(url)")
+
+        return url
     }
 
     func parseLink(_ link: String) {}
