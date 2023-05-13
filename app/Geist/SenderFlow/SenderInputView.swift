@@ -17,7 +17,7 @@ struct SenderInputView: View {
     }
     var body: some View {
         VStack {
-            Text("Send 101 GHO 👻")
+            Text("Send \(Constants.amount) GHO 👻")
                 .font(.system(size: 24))
                 .foregroundColor(GeistFontColor.title)
                 .bold()
