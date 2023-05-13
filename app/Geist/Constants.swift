@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum Constants {
+    static let providerUrl = ""
+}
