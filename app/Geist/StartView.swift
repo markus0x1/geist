@@ -38,7 +38,7 @@ struct StartView: View {
     }
 
     private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "geist" else {
+        guard url.scheme == "geist" || url.scheme == "https"  else {
             return
         }
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
@@ -46,7 +46,7 @@ struct StartView: View {
             return
         }
 
-        guard let action = components.host, action == "open-claim" else {
+        guard let action = components.host, action == "claim" else {
             print("Unknown URL, we can't handle this one!")
             return
         }
