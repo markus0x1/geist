@@ -31,10 +31,6 @@ struct StartView: View {
                 handleIncomingURL(incomingURL)
             }
         }
-        .task {
-            let manager = Manager.shared
-            await manager.configReceiver()
-        }
     }
 
     private func handleIncomingURL(_ url: URL) {
