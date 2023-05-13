@@ -18,7 +18,7 @@ contract BaseSetup is Test {
     address constant ENTRY_POINT_ADDRESSS = address(0);
     address executor;
 
-    GHO token;
+    ERC20 token;
     AppAccount holder;
 
     function setUp() public virtual {
@@ -30,8 +30,8 @@ contract BaseSetup is Test {
         bob = users[1];
         vm.label(bob, "Bob");
 
-        token = new GHO(1e18);
-        holder = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS),  executor, bob, token);
+       // token = new ERC20(1e18);
+        holder = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS),  executor, bob);
 
         console.log("deployed token with symbol", token.symbol());
     }
@@ -45,13 +45,13 @@ contract BaseSetup is Test {
 
         vm.startPrank(alice);
         token.approve(address(holder), 1e18);
-        holder.deposit(alice, 1e18);
+        holder.deposit(alice, token, 1e18);
         vm.stopPrank();
 
         assertEq(token.balanceOf(alice), 0);
         assertEq(token.balanceOf(bob), 0);
         vm.prank(bob);
-        holder.withdraw(bob,  1e18);
+        holder.withdraw(bob, token, 1e18);
         assertEq(token.balanceOf(bob), 1e18);
     }
 }

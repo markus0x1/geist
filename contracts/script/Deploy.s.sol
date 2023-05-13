@@ -22,7 +22,7 @@ contract DeployFull is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         gho = new GHO(initalSupply);
-        account = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), owner, executor, gho);
+        account = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), owner, executor);
 
         console.log("GHO address: %s", address(gho));
         console.log("account address: %s", address(account));

@@ -6,16 +6,11 @@ import "./GHO.sol";
 import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract TokenHolder {
-    GHO token;
-
-    constructor(GHO _token) {
-        token = _token;
-    }
 
     // function deposit(address sender, uint256 amount) (deposit token into contract)
     // appprove contract before
 
-    function _deposit(address sender, uint256 amount) internal {
+    function _deposit(address sender,ERC20 token ,  uint256 amount) internal {
         token.transferFrom(sender, address(this), amount);
     }
 
@@ -25,7 +20,7 @@ contract TokenHolder {
     //}
 
     //function _withdraw(uint256 amount, address beneficiary) internal {}
-    function _withdraw(address beneficiary, uint256 amount) internal virtual {
+    function _withdraw(address beneficiary,ERC20 token, uint256 amount) internal virtual {
         token.transfer(beneficiary, amount);
     }
 }

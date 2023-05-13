@@ -93,7 +93,8 @@ abstract contract AppSpender  {
         // effects
         allowance.status = ApproveStatus.Executed;
         
-        _withdraw(beneficient, allowance.amount);
+        ERC20 token = ERC20(address(0));
+        _withdraw(beneficient, token, allowance.amount);
 
         return true;
     }
@@ -108,6 +109,6 @@ abstract contract AppSpender  {
 
     function getOwner() public view virtual  returns (address);
 
-    function _withdraw( address beneficiary, uint256 amount) internal virtual;
+    function _withdraw( address beneficiary, ERC20 token,  uint256 amount) internal virtual;
 
 }

@@ -31,9 +31,9 @@ contract AppAccount is SimpleAccount, AppSpenderSigner, TokenHolder  {
     constructor(
         IEntryPoint anEntryPoint,
         address _executor,
-        address _owner,
-        GHO _token
-    ) SimpleAccount(anEntryPoint)  TokenHolder(_token) {
+        address _owner
+
+    ) SimpleAccount(anEntryPoint)  TokenHolder() {
         executor = _executor;
         owner = _owner;
     }
@@ -44,16 +44,16 @@ contract AppAccount is SimpleAccount, AppSpenderSigner, TokenHolder  {
     }
 
     // deposit function
-    function deposit(address benficiary, uint256 amount) public {
-        _deposit(benficiary, amount);
+    function deposit(address benficiary, ERC20 token, uint256 amount) public {
+        _deposit(benficiary,token, amount);
     }
 
-    function withdraw(address benficiary, uint256 amount) public onlyOwner {
-        _withdraw(benficiary, amount);
+    function withdraw(address benficiary, ERC20 token, uint256 amount) public onlyOwner {
+        _withdraw(benficiary,token, amount);
     }
 
-    function _withdraw(address beneficiary, uint256 amount) internal override(TokenHolder,AppSpender) {
-        TokenHolder._withdraw(beneficiary, amount);
+    function _withdraw(address beneficiary, ERC20 token, uint256 amount) internal override(AppSpender,TokenHolder) {
+        TokenHolder._withdraw(beneficiary,token, amount);
     }
 
     // _validateSignature(UserOperation calldata userOp, bytes32 userOpHash)
