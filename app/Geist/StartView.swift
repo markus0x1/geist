@@ -15,7 +15,7 @@ struct StartView: View {
         NavigationStack {
             VStack {
                 NavigationLink("Send GHO") {
-                    ShareScreenView()
+                    SenderStartView()
                 }
                 .padding()
                 NavigationLink(
