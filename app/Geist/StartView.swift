@@ -33,6 +33,7 @@ struct StartView: View {
         .task {
             let manager = Manager.shared
             await manager.configSender()
+            await manager.configReceiver()
         }
     }
 
