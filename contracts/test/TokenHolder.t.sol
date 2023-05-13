@@ -37,21 +37,33 @@ contract BaseSetup is Test {
     }
 
     function testIt() public {
+        // pre
+
         assertEq(token.balanceOf(alice), 0);
+
+
+        // send tokens to alice
         token.transfer(alice, 1e18);
+
         assertEq(token.balanceOf(address(this)), 0);
         assertEq(token.balanceOf(alice), 1e18);
         
 
+        // alice deposits
         vm.startPrank(alice);
         token.approve(address(holder), 1e18);
-        holder.deposit(alice, token, 1e18);
+        holder.depositToken(alice, token, 1e18);
         vm.stopPrank();
 
         assertEq(token.balanceOf(alice), 0);
         assertEq(token.balanceOf(bob), 0);
+        
+        
+        // bow withdraws
         vm.prank(bob);
-        holder.withdraw(bob, token, 1e18);
+        holder.withdrawToken(bob, token, 1e18);
+
         assertEq(token.balanceOf(bob), 1e18);
+        assertEq(token.balanceOf(address(holder)), 0);
     }
 }

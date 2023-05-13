@@ -3,23 +3,42 @@
 pragma solidity ^0.8.0;
 
 import "./GHO.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract TokenHolder {
+    using SafeERC20 for ERC20;
 
-    // function deposit(address sender, uint256 amount) (deposit token into contract)
-    // appprove contract before
+    event Deposit(address indexed sender, ERC20 token, uint256 amount);
+    event Withdraw(address indexed beneficiary, ERC20 token, uint256 amount);
 
-    function _deposit(address sender,ERC20 token ,  uint256 amount) internal {
-        token.transferFrom(sender, address(this), amount);
+    function depositToken(
+        address sender,
+        ERC20 token,
+        uint256 amount
+    ) public {
+        _deposit(sender, token, amount);
     }
 
-    // function withdraw (withdraw tokens from contract)
-    //function withdraw(uint256 amount) public {
-    //    _withdraw(amount, msg.sender);
-    //}
+    function _deposit(address sender, ERC20 token, uint256 amount) internal {
+        token.safeTransferFrom(sender, address(this), amount);
+        emit Deposit(sender, token, amount);
+    }
 
-    //function _withdraw(uint256 amount, address beneficiary) internal {}
-    function _withdraw(address beneficiary,ERC20 token, uint256 amount) internal virtual {
-        token.transfer(beneficiary, amount);
+    function withdrawToken(
+        address sender,
+        ERC20 token,
+        uint256 amount
+    ) public {
+        _withdraw(sender, token, amount);
+        emit Withdraw(sender, token, amount);
+    }
+
+
+    function _withdraw(
+        address beneficiary,
+        ERC20 token,
+        uint256 amount
+    ) internal virtual {
+        token.safeTransfer(beneficiary, amount);
     }
 }
