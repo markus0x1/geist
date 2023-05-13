@@ -1,10 +1,9 @@
-// contracts/GLDToken.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+
 import "./AppAccount.sol";
-import "./GHO.sol";
 
 contract Factory is Ownable {
     IEntryPoint immutable ENTRY_POINT_ADDRESSS;
