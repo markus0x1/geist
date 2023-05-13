@@ -10,17 +10,20 @@ import SwiftUI
 struct ShareSuccessView: View {
     var amount: UInt = 100
     var body: some View {
-        VStack {
-            Image(systemName: "checkmark.circle")
-                .font(.system(size: 80))
-                .foregroundColor(GeistColor.purpleLight)
-            Text("You send \(Text("\(amount) GHO").foregroundColor(GeistColor.purpleDark).bold())\nto your fren.")
-                .font(.system(size: 32))
-                .foregroundColor(GeistFontColor.secondaryTitle)
-                .multilineTextAlignment(.center)
-                .padding(.top, 16)
+        ZStack {
+            GeistColor.purpleLight2.edgesIgnoringSafeArea(.all)
+            VStack {
+                Image(systemName: "checkmark.circle")
+                    .font(.system(size: 80))
+                    .foregroundColor(GeistColor.purpleDark)
+                Text("You send \(Text("\(amount) GHO").foregroundColor(GeistColor.purpleDark).bold())\nto your fren.")
+                    .font(.system(size: 32))
+                    .foregroundColor(GeistFontColor.secondaryTitle)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 16)
+            }
+            .padding(32)
         }
-        .padding(32)
         .toolbar(.hidden)
     }
 }
