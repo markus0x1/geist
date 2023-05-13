@@ -16,12 +16,13 @@ contract Factory is Ownable {
         executor = _executor;
     }
 
-    function deployNewAppAccount(address _owner) public onlyOwner returns (address) {
+    function deployNewAppAccount(address _owner) public onlyOwner returns (address payable) {
         AppAccount appAccount = new AppAccount(
             ENTRY_POINT_ADDRESSS,
             executor,
             _owner
         );
-        return address(appAccount);
+        appAccounts[_owner] = appAccount;
+        return payable(address(appAccount));
     }
 }
