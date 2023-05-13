@@ -10,6 +10,7 @@ import Foundation
 final class Manager {
     static let shared = Manager()
     let accountProvider = AccountProvider()
+    let linkBuilder = LinkBuilder()
 
     var balanceProvider: BalanceProvider!
     var provider: Web3Provider!
