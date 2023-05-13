@@ -35,6 +35,11 @@ struct ShareScreenView: View {
                 .foregroundColor(GeistFontColor.title)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 16)
+            Text("The person has 48h to claim it.")
+                .font(.system(size: 13))
+                .foregroundColor(GeistFontColor.secondaryTitle)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 16)
             ShareLink(item: url, message: Text("Hey fren, I'm sending you \(Constants.amount) GHO! 👻")) {
                 Label("Share", systemImage:  "square.and.arrow.up")
                     .font(.system(size: 24))
