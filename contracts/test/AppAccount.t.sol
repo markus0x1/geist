@@ -14,7 +14,7 @@ contract AppAccountTest is Test {
     GHO token;
 
     function setUp() public {
-        account = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), owner, executor, token);
+        account = new AppAccount(IEntryPoint(ENTRY_POINT_ADDRESSS), owner, executor);
 
     }
 
