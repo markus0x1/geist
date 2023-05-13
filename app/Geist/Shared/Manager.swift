@@ -71,13 +71,13 @@ extension Manager {
 //        await transfer()
 //        return
 
-        let accountContract = EthereumAddress("0xe7f1725e7734ce288f8367e1bb143e90bb3f0512")
-        let gho = EthereumAddress("0x5FbDB2315678afecb367f032d93F642f64180aa3")!
+        let accountContract = EthereumAddress(Constants.aliceSender)
+        let gho = EthereumAddress(Tokens.GHO)!
         let amount = Utilities.parseToBigUInt("10", units: .ether)
         let parameters = [senderAccount.address, gho.address, amount] as [AnyObject]
         let web3Provider = provider.web3.provider
-        let contract = provider.web3.contract(GeistContract.abi, at: EthereumAddress(from: "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"))!
-        let writeOperation = contract.createWriteOperation("deposit", parameters: parameters)!
+        let contract = provider.web3.contract(GeistContract.abi, at: accountContract)!
+        let writeOperation = contract.createWriteOperation("depositToken", parameters: parameters)!
         var tx = writeOperation.transaction
         tx.from = senderAccount.address
         tx.chainID = provider.web3.provider.network!.chainID
