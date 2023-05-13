@@ -14,7 +14,6 @@ abstract contract AppSpender {
         Cancelled, // Manually cancelled
         Executed
     }
-    // ,TimeOut   => is implicit set by resetTime (see: isSpendable())
 
     // allowance module
     struct Allowance {
