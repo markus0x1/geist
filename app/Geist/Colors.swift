@@ -9,6 +9,20 @@ import SwiftUI
 
 enum GeistColor {
     static let black = Color(hex: 0x000000)
+    // GHO colors
+    static let gray = Color(hex: 0x5D5C6C)
+    static let purpleDark = Color(hex: 0x39375A)
+    static let purpleGray = Color(hex: 0xBCB6CB)
+    static let purpleLight = Color(hex: 0xC7BBE7)
+    static let purpleLight2 = Color(hex: 0xDBD2EF)
+}
+
+enum GeistFontColor {
+    static let border = GeistColor.purpleDark
+    static let borderSecondary = GeistColor.purpleGray
+    static let title = GeistColor.purpleDark
+    static let secondaryTitle = GeistColor.gray
+    static let text = GeistColor.purpleDark
 }
 
 // MARK: - Extensions
