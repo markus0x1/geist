@@ -22,21 +22,11 @@ import "./AppSpender.sol";
     - chain id
 */
 
-
 abstract contract AppSpenderSigner is AppSpender {
-
-
-    function approveBySignature  (
-        uint256 amount,
-        uint16 resetTimeMin,
-        uint16 nonce,
-        uint256 id
-    ) public {
+    function approveBySignature(uint256 amount, uint16 resetTimeMin, uint16 nonce, uint256 id) public {
         // UserOperation calldata userOp, bytes32 userOpHash
         _approveId(amount, resetTimeMin, nonce, id);
     }
-
-
 
     function _validateSignature() internal virtual;
 }
