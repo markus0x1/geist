@@ -19,14 +19,8 @@ contract DeployFull is Script {
     AppAccount aliceAa;
 
     function logDeployment() internal view {
-        console.log(
-            "Contract Factory: %s",
-            address(factory)
-        );
-        console.log(
-            "Example Wallet: %s",
-            address(aliceAa)
-        );
+        console.log("Contract Factory: %s", address(factory));
+        console.log("Example Wallet: %s", address(aliceAa));
         console.log("Example GHO: %s", address(gho));
     }
 
