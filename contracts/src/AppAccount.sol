@@ -45,13 +45,17 @@ contract AppAccount is AppSpenderSigner, TokenHolder, SimpleAccount {
 
     // _validateSignature(UserOperation calldata userOp, bytes32 userOpHash)
     function signatureIsValid() internal returns (bool) {
-        _validateSignature();
+        // _validateSignature();
         return true;
     }
 
-    function _validateSignature() internal override {}
+    // function _validateSignature() internal override {}
 
-    function _withdraw(address beneficiary, ERC20 token, uint256 amount) internal override(TokenHolder, AppSpender) {
+    function _withdraw(address beneficiary, ERC20 token, uint256 amount)
+        internal
+        override(TokenHolder, AppSpender)
+        onlyExecutor
+    {
         require(signatureIsValid(), "signature is not valid");
         TokenHolder._withdraw(beneficiary, token, amount);
     }

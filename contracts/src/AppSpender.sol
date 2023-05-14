@@ -15,33 +15,41 @@ abstract contract AppSpender {
         Executed
     }
 
+    // todo: write this as UserOperation
     // allowance module
     struct Allowance {
         uint256 amount;
-        uint16 resetTimeMin;
+        uint72 resetTimeMin;
         uint16 nonce;
         ApproveStatus status;
+        ERC20 token;
     }
 
-    mapping(uint256 => Allowance) public allowances;
+    mapping(uint256 => Allowance) internal allowanceById;
     uint256 lastAllowance;
-    uint256 lastAllowanceNonce;
+    uint16 public allowanceNonce;
 
-    event ApprovedId(uint256 indexed id, uint256 amount, uint16 resetTimeMin, uint16 nonce, ApproveStatus status);
+    function getAllowanceById(uint256 id) public view returns (Allowance memory) {
+        return allowanceById[id];
+    }
+
+    event ApprovedId(
+        uint256 indexed id, uint256 amount, ERC20 token, uint72 resetTimeMin, uint16 nonce, ApproveStatus status
+    );
 
     // approve an id for spending
-    function approveId(uint256 amount, uint16 resetTimeMin, uint16 nonce, uint256 id) public {
+    function approveId(uint256 amount, ERC20 token, uint72 resetTimeMin, uint256 id) public {
         require(msg.sender == getOwner(), "only owner");
-        _approveId(amount, resetTimeMin, nonce, id);
+        _approveId(amount, token, resetTimeMin, id);
     }
 
-    function _approveId(uint256 amount, uint16 resetTimeMin, uint16 nonce, uint256 id) internal {
-        require(nonce > lastAllowanceNonce, "nonce must be increasing");
+    function _approveId(uint256 amount, ERC20 token, uint72 resetTimeMin, uint256 id) internal {
         require(resetTimeMin <= MAX_RESET_TIME, "reset time too large");
 
-        allowances[id] = Allowance(amount, resetTimeMin, nonce, ApproveStatus.Approved);
+        allowanceById[id] = Allowance(amount, resetTimeMin, allowanceNonce, ApproveStatus.Approved, token);
 
-        emit ApprovedId(id, amount, resetTimeMin, nonce, ApproveStatus.Approved);
+        allowanceNonce += 1;
+        emit ApprovedId(id, amount, token, resetTimeMin, allowanceNonce, ApproveStatus.Approved);
     }
 
     function cancelId(uint256 id) public {
@@ -50,7 +58,7 @@ abstract contract AppSpender {
     }
 
     function _cancelId(uint256 id) internal {
-        Allowance storage allowance = allowances[id];
+        Allowance storage allowance = allowanceById[id];
         require(allowance.status == ApproveStatus.Approved, "allowance not approved");
         allowance.status = ApproveStatus.Cancelled;
     }
@@ -62,24 +70,25 @@ abstract contract AppSpender {
     function spendId(uint256 id, address beneficient) public returns (bool) {
         // checks
         require(msg.sender == getExecutor(), "only executor");
-        Allowance storage allowance = allowances[id];
+        Allowance storage allowance = allowanceById[id];
         require(allowance.status == ApproveStatus.Approved, "allowance not approved");
         require(allowance.resetTimeMin > block.timestamp, "allowance expired");
 
         // effects
         allowance.status = ApproveStatus.Executed;
 
-        ERC20 token = ERC20(address(0));
-        _withdraw(beneficient, token, allowance.amount);
+        // interaction
+        _withdraw(beneficient, allowance.token, allowance.amount);
 
         return true;
     }
 
     // viewer
     function isSpendable(uint256 id) public view returns (bool) {
-        Allowance storage allowance = allowances[id];
+        Allowance storage allowance = allowanceById[id];
         return allowance.status == ApproveStatus.Approved && allowance.resetTimeMin > block.timestamp;
     }
+
     // shells
 
     function getExecutor() public view virtual returns (address);
