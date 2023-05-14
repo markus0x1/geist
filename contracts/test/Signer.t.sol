@@ -13,17 +13,19 @@ contract SignerTest is Test {
     address executor;
 
     uint256 constant pk = 1;
-    address alice = vm.addr(pk);
+    address alice;
 
     GHO token;
 
     uint72 lateDate;
 
     function setUp() public {
+        alice = vm.addr(pk);
         account = new AppAccount(
             IEntryPoint(ENTRY_POINT_ADDRESSS),
-            alice,
-            executor
+            executor,
+            alice
+            
         );
         token = new GHO(1e18);
         lateDate = uint72(block.timestamp + 1 days);
@@ -38,20 +40,24 @@ contract SignerTest is Test {
 
     function testSignatureWithApproval() public {
         AppSpenderSigner.ApproveArgs memory args = AppSpenderSigner.ApproveArgs(1e18, token, 0, 0);
-        bytes32 hash = account.getApproveHash(args);
 
+        bytes32 hash = account.getApproveHash(args);
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(pk, hash);
+
         address signer = ECDSA.recover(hash, v, r, s);
         assertEq(alice, signer); // [PASS]
     }
 
     function testSignApprovalBySignature() public {
-        assertEq(account.getOwner(), alice);
         AppSpenderSigner.ApproveArgs memory args = AppSpenderSigner.ApproveArgs(1e18, token, 0, 0);
         bytes32 hash = account.getApproveHash(args);
+
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(pk, hash);
 
         address signer = ECDSA.recover(hash, v, r, s);
+        console.log("signer: %s", signer);
+        console.log("alice: %s", alice);
+
         assertEq(alice, signer); // [PASS]
 
         account.approveBySignature(args, v, r, s);
@@ -62,6 +68,6 @@ contract SignerTest is Test {
         assertEq(allowanceApproved.resetTimeMin, args.resetTimeMin);
         assertEq(address(allowanceApproved.token), address(args.token));
         assertEq(allowanceApproved.nonce, account.allowanceNonce() - 1);
-        assertEq(account.isSpendable(0), true);
+        assertEq(account.isSpendable(0), block.timestamp < lateDate);
     }
 }

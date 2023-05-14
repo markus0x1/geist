@@ -57,7 +57,7 @@ contract BaseSetup is Test {
         assertEq(token.balanceOf(bob), 0);
 
         // bow withdraws
-        vm.prank(bob);
+        vm.prank(executor);
         holder.withdrawToken(bob, token, 1e18);
 
         assertEq(token.balanceOf(bob), 1e18);

@@ -35,11 +35,11 @@ contract AppAccount is AppSpenderSigner, TokenHolder, SimpleAccount {
         return userOp.hash();
     }
 
-    function getExecutor() public view override returns (address) {
+    function _getExecutor() internal view override returns (address) {
         return executor;
     }
 
-    function getOwner() public view override returns (address) {
+    function _getOwner() internal view override returns (address) {
         return owner;
     }
 
