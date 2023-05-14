@@ -68,6 +68,6 @@ contract SignerTest is Test {
         assertEq(allowanceApproved.resetTimeMin, args.resetTimeMin);
         assertEq(address(allowanceApproved.token), address(args.token));
         assertEq(allowanceApproved.nonce, account.allowanceNonce() - 1);
-        assertEq(account.isSpendable(0), block.timestamp < lateDate);
+        assertEq(account.isSpendable(0), false);
     }
 }

@@ -23,15 +23,9 @@ abstract contract AppSpenderSigner is AppSpender {
 
     function approveBySignature(ApproveArgs calldata args, uint8 v, bytes32 r, bytes32 s) public {
         bytes32 hash = getApproveHash(args);
-        
-        console.log("hash");
-        console.logBytes32(hash);
 
         address signer = ECDSA.recover(hash, v, r, s);
-        console.log("signer: %s", signer);
-        console.log("owner: %s", _getOwner());
         require(signer == _getOwner(), "Invalid Approve signature");
-
 
         _approveId(args.amount, args.token, args.resetTimeMin, args.id);
     }
