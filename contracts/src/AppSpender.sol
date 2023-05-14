@@ -39,7 +39,7 @@ abstract contract AppSpender {
 
     // approve an id for spending
     function approveId(uint256 amount, ERC20 token, uint72 resetTimeMin, uint256 id) public {
-        require(msg.sender == getOwner(), "only owner");
+        require(msg.sender == _getOwner(), "only owner");
         _approveId(amount, token, resetTimeMin, id);
     }
 
@@ -53,7 +53,7 @@ abstract contract AppSpender {
     }
 
     function cancelId(uint256 id) public {
-        require(msg.sender == getOwner(), "only executor");
+        require(msg.sender == _getOwner(), "only executor");
         _cancelId(id);
     }
 
@@ -69,7 +69,7 @@ abstract contract AppSpender {
     /// @return Status
     function spendId(uint256 id, address beneficient) public returns (bool) {
         // checks
-        require(msg.sender == getExecutor(), "only executor");
+        require(msg.sender == _getExecutor(), "only executor");
         Allowance storage allowance = allowanceById[id];
         require(allowance.status == ApproveStatus.Approved, "allowance not approved");
         require(allowance.resetTimeMin > block.timestamp, "allowance expired");
@@ -91,9 +91,9 @@ abstract contract AppSpender {
 
     // shells
 
-    function getExecutor() public view virtual returns (address);
+    function _getExecutor() internal view virtual returns (address);
 
-    function getOwner() public view virtual returns (address);
+    function _getOwner() internal view virtual returns (address);
 
     function _withdraw(address beneficiary, ERC20 token, uint256 amount) internal virtual;
 }
